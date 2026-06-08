@@ -68,13 +68,16 @@ smtpd_sender_restrictions =
     reject_unknown_sender_domain,
     permit
 
+# Strict relay rules to close the open relay loophole:
+smtpd_relay_restrictions =
+    reject_unauth_pipelining,
+    permit_mynetworks,
+    reject_unauth_destination
+
 # Recipient restrictions:
 smtpd_recipient_restrictions =
-   reject_unauth_pipelining,
    reject_non_fqdn_recipient,
    reject_unknown_recipient_domain,
-   permit_mynetworks,
-   reject_unauth_destination,
    {% if use_dqn %}
    # Add in dqn RBLs
    reject_rbl_client {{ env['POSTFIX_DQN_KEY'] }}.zen.dq.spamhaus.net=127.0.0.[2..11],
