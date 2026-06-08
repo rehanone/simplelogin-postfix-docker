@@ -68,11 +68,11 @@ smtpd_sender_restrictions =
     reject_unknown_sender_domain,
     permit
 
-# Strict relay rules to close the open relay loophole safely with MYNETWORKS:
+# Strict relay rules to close the open relay loophole:
 smtpd_relay_restrictions =
     reject_unauth_pipelining,
-    reject_unauth_destination,
-    permit_mynetworks
+    permit_mynetworks,
+    reject_unauth_destination
 
 # Recipient restrictions:
 smtpd_recipient_restrictions =
